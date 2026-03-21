@@ -33,10 +33,12 @@ def index():
         # CRIANDO FIGURA SEM SHOW()
         fig = func(dfs, dataset, dados.cod_capitais)
 
+        import traceback
+
         try:
             grafico_html = fig.to_html(full_html=False)
-        except:
-            grafico_html = "<p>Erro ao gerar gráfico</p>"
+        except Exception:
+            grafico_html = f"<pre>{traceback.format_exc()}</pre>"
 
     return render_template(
         "index.html",
@@ -46,4 +48,4 @@ def index():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
