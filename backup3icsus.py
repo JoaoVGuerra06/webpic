@@ -945,8 +945,7 @@ for nome, df in dfs2.items():
 ## SAMU 192:ATENDIMENTO DAS CHAMADAS RECEBIDAS PELA CENTRAL DE REGULAÇÃO DAS URGÊNCIAS
 """
 
-plot_todos(dfs1, cod_capitais)
+#plot_todos(dfs1, cod_capitais)
 
 """## SAMU 192: ATENDIMENTO DAS CHAMADAS RECEBIDAS PELA CENTRAL DE REGULACAO DAS URGENCIAS COM ORIENTAC"""
-
-plot_todos(dfs2, cod_capitais)
+#t_todos(dfs2, cod_capitais)#
