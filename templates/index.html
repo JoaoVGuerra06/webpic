@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard SUS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
+<div class="container">
+
+    <h1>📊 Dashboard de Procedimentos Médicos</h1>
+
+    <form method="POST">
+
+        <label>Procedimento:</label>
+        <select name="procedimento">
+            <option value="samu">SAMU</option>
+            <option value="samu_orientacao">SAMU com orientação</option>
+        </select>
+
+        <label>Tipo de Gráfico:</label>
+        <select name="grafico">
+            <option value="linhas">Linhas</option>
+            <option value="barras">Barras</option>
+            <option value="barras_stack">Barras Empilhadas</option>
+            <option value="heatmap">Heatmap</option>
+            <option value="area">Área</option>
+        </select>
+
+        <label>Período:</label>
+        <select name="dataset">
+            <option value="meses20182020">Meses 2018-2020</option>
+            <option value="meses20222023">Meses 2022-2023</option>
+            <option value="meses_total">Meses Total</option>
+            <option value="anos_total">Anos Total</option>
+        </select>
+
+        <button type="submit">Gerar Gráfico</button>
+
+    </form>
+
+    <div class="grafico">
+        {% if grafico %}
+            {{ grafico|safe }}
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
