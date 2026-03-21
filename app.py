@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import backup3icsus as dados
+import traceback
 
 app = Flask(__name__)
 
@@ -23,25 +24,32 @@ def index():
     grafico_html = None
 
     if request.method == "POST":
-        proc = request.form["procedimento"]
-        tipo = request.form["grafico"]
-        dataset = request.form["dataset"]
-
-        dfs = procedimentos[proc]
-        func = graficos[tipo]
-
-        # CRIANDO FIGURA SEM SHOW()
         try:
+            proc = request.form["procedimento"]
+            tipo = request.form["grafico"]
+            dataset = request.form["dataset"]
+
+            dfs = procedimentos.get(proc)
+            func = graficos.get(tipo)
+
+            # 🔒 validações importantes
+            if dfs is None:
+                return "<h1>Procedimento inválido</h1>"
+
+            if func is None:
+                return "<h1>Tipo de gráfico inválido</h1>"
+
+            if dataset not in dfs:
+                return f"<h1>Dataset inválido: {dataset}</h1>"
+
+            # 🎯 gerar gráfico
             fig = func(dfs, dataset, dados.cod_capitais)
-            grafico_html = fig.to_html(full_html=False)
-        except Exception as e:
-            import traceback
-            grafico_html = f"<pre>{traceback.format_exc()}</pre>"
 
-        import traceback
+            if fig is None:
+                return "<h1>Erro: função não retornou gráfico</h1>"
 
-        try:
             grafico_html = fig.to_html(full_html=False)
+
         except Exception:
             grafico_html = f"<pre>{traceback.format_exc()}</pre>"
 
