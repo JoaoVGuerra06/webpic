@@ -31,7 +31,12 @@ def index():
         func = graficos[tipo]
 
         # CRIANDO FIGURA SEM SHOW()
-        fig = func(dfs, dataset, dados.cod_capitais)
+        try:
+            fig = func(dfs, dataset, dados.cod_capitais)
+            grafico_html = fig.to_html(full_html=False)
+        except Exception as e:
+            import traceback
+            grafico_html = f"<pre>{traceback.format_exc()}</pre>"
 
         import traceback
 
