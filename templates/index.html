@@ -2,21 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard SUS</title>
+    <title>Estatísticas SUS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>📊 Dashboard de Procedimentos Médicos</h1>
+    <h1>Estatísticas de de Procedimentos Médicos do SUS</h1>
 
     <form method="POST">
 
         <label>Procedimento:</label>
         <select name="procedimento">
-            <option value="samu">SAMU</option>
-            <option value="samu_orientacao">SAMU com orientação</option>
+            <option value="samu">SAMU 192</option>
+            <option value="samu_orientacao">SAMU 192: com orientação</option>
         </select>
 
         <label>Tipo de Gráfico:</label>
@@ -31,7 +31,7 @@
         <label>Período:</label>
         <select name="dataset">
             <option value="meses20182020">Meses 2018-2020</option>
-            <option value="meses20222023">Meses 2022-2023</option>
+            <option value="meses20222023">Meses 2023-2024</option>
             <option value="meses_total">Meses Total</option>
             <option value="anos_total">Anos Total</option>
         </select>
