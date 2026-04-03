@@ -7,6 +7,7 @@ app = Flask(__name__)
 procedimentos = {
     "samu": dados.dfs1,
     "samu_orientacao": dados.dfs2
+    "Urgencia_em_atencao_basica": dados.dfs3
 }
 
 graficos = {
