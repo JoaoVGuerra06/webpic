@@ -401,51 +401,51 @@ for nome, df in dfs2.items():
 
 """ ATENDIMENTO DE URGÊNCIA EM ATENÇÃO BÁSICA"""
 
-# dados1 = ""
+ dados1 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/anos20182020.csv"
 
-# dados2 = ""
+ dados2 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/anos20232024.csv"
 
-# dados3 = ""
+ dados3 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/meses20182020.csv"
 
-# dados4 = ""
+ dados4 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/meses20232024.csv"
 
-# links = [
-# dados1,
-# dados2,
-# dados3,
-# dados4
-# ]
-
-
-# df_tot3 = {}
-# dfs3 = {}
-
-# for link in links:
-
-#     nome = link.split("/")[-1].replace(".csv","")
-
-#     df = pd.read_csv(link, sep=";", skiprows=5, encoding="latin1")
-
-#     df_tot3[nome] = df
-#     dfs3[nome] = percapita(df, pop_capitais)
+ links = [
+ dados1,
+ dados2,
+ dados3,
+ dados4
+ ]
 
 
-# dfs3["anos_total"] = pd.concat(
-#     [df for nome, df in dfs3.items() if "ano" in nome],
-#     axis=1
-# )
+ df_tot3 = {}
+ dfs3 = {}
 
-# dfs3["meses_total"] = pd.concat(
-#     [df for nome, df in dfs3.items() if "mes" in nome],
-#     axis=1
-# )
+ for link in links:
 
-# dfs3["anos_total"] = dfs3["anos_total"].loc[:, ~dfs3["anos_total"].columns.duplicated()]
-# dfs3["meses_total"] = dfs3["meses_total"].loc[:, ~dfs3["meses_total"].columns.duplicated()]
+     nome = link.split("/")[-1].replace(".csv","")
+
+     df = pd.read_csv(link, sep=";", skiprows=5, encoding="latin1")
+
+     df_tot3[nome] = df
+     dfs3[nome] = percapita(df, pop_capitais)
 
 
-# for nome, df in dfs3.items():
-#     print(nome, len(df))
+ dfs3["anos_total"] = pd.concat(
+     [df for nome, df in dfs3.items() if "ano" in nome],
+     axis=1
+ )
+
+ dfs3["meses_total"] = pd.concat(
+     [df for nome, df in dfs3.items() if "mes" in nome],
+     axis=1
+ )
+
+ dfs3["anos_total"] = dfs3["anos_total"].loc[:, ~dfs3["anos_total"].columns.duplicated()]
+ dfs3["meses_total"] = dfs3["meses_total"].loc[:, ~dfs3["meses_total"].columns.duplicated()]
+
+
+ for nome, df in dfs3.items():
+     print(nome, len(df))
 
 """ATENDIMENTO DE URGENCIA EM ATENÇÃO ESPECIALIZADA"""
 
