@@ -401,13 +401,13 @@ for nome, df in dfs2.items():
 
 """ ATENDIMENTO DE URGÊNCIA EM ATENÇÃO BÁSICA"""
 
- dados1 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/anos20182020.csv"
+ dados1 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/ATENDIMENTO%20DE%20URGENCIA%20EM%20ATENCAO%20BASICA/anos20182020.csv"
 
- dados2 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/anos20232024.csv"
+ dados2 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/ATENDIMENTO%20DE%20URGENCIA%20EM%20ATENCAO%20BASICA/anos20232024.csv"
 
- dados3 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/meses20182020.csv"
+ dados3 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/ATENDIMENTO%20DE%20URGENCIA%20EM%20ATENCAO%20BASICA/meses20182020.csv"
 
- dados4 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/SAMU%20192%3A%20ATENDIMENTO%20DAS%20CHAMADAS%20RECEBIDAS%20PELA%20CENTRAL%20DE%20REGULACAO%20DAS%20URGENCIAS%20COM%20ORIENTAC/meses20232024.csv"
+ dados4 = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/ATENDIMENTO%20DE%20URGENCIA%20EM%20ATENCAO%20BASICA/meses20232024.csv"
 
  links = [
  dados1,
