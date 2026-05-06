@@ -2,49 +2,30 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Estatísticas SUS</title>
+    <title>Dashboard SUS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>Estatísticas de Procedimentos Médicos do SUS</h1>
+    <h1>Dashboard de Dados do SUS</h1>
+    <p>Escolha o tipo de visualização:</p>
 
-    <form method="POST">
+    <div class="cards">
 
-        <label>Procedimento:</label>
-        <select name="procedimento">
-            <option value="samu">SAMU 192</option>
-            <option value="samu_orientacao">SAMU 192: com orientação</option>
-            <option value="Urgencia_em_atencao_basica">Atendimentos de Urgência em Atenção Básica</option>
-        </select>
+        <!-- CARD GRÁFICOS -->
+        <a href="{{ url_for('graficos') }}" class="card">
+            <h2>📊 Visualizações Gráficas</h2>
+            <p>Explore dados em gráficos interativos.</p>
+        </a>
 
-        <label>Tipo de Gráfico:</label>
-        <select name="grafico">
-            <option value="linhas">Linhas</option>
-            <option value="barras">Barras</option>
-            <option value="barras_stack">Barras Empilhadas</option>
-            <option value="heatmap">Heatmap</option>
-            <option value="area">Área</option>
-        </select>
+        <!-- CARD MAPAS -->
+        <a href="{{ url_for('mapas') }}" class="card">
+            <h2>🌎 Visualização Geográfica</h2>
+            <p>Veja os dados em mapas e análises espaciais.</p>
+        </a>
 
-        <label>Período:</label>
-        <select name="dataset">
-            <option value="meses20182020">Meses 2018-2020</option>
-            <option value="meses20232024">Meses 2023-2024</option>
-            <option value="meses_total">Meses Total</option>
-            <option value="anos_total">Anos Total</option>
-        </select>
-
-        <button type="submit">Gerar Gráfico</button>
-
-    </form>
-
-    <div class="grafico">
-        {% if grafico %}
-            {{ grafico|safe }}
-        {% endif %}
     </div>
 
 </div>
