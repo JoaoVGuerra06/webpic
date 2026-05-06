@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapas SUS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Visualização Geográfica dos Dados do SUS</h1>
+
+    <a href="{{ url_for('index') }}" class="voltar">⬅ Voltar</a>
+
+    <form method="POST">
+
+        <label>Tipo de Mapa:</label>
+        <select name="tipo_mapa">
+            <option value="choropleth">Mapa de Calor (Estados)</option>
+            <option value="pontos">Mapa de Pontos</option>
+        </select>
+
+        <label>Procedimento:</label>
+        <select name="procedimento">
+            <option value="samu">SAMU 192</option>
+            <option value="urgencia">Urgência</option>
+        </select>
+
+        <button type="submit">Gerar Mapa</button>
+
+    </form>
+
+    <div class="mapa">
+        {% if mapa %}
+            {{ mapa|safe }}
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
