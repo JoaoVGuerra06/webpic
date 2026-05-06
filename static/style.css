@@ -31,11 +31,20 @@ body {
     background: #e3f2fd;
 }
 
-.voltar {
+.voltar{
     display: inline-block;
     margin-bottom: 20px;
+    padding: 10px 15px;
+    background: #1976d2;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
+.voltar:hover{
+    background: #125aa0;
+}
 h1 {
     margin-bottom: 30px;
 }
