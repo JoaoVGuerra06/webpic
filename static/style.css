@@ -214,9 +214,8 @@ button[type=submit] {
     font-size: 0.9rem;
     transition: background 0.2s;
     display: block;
-    width: fit-content;
-    align-self: flex-start;
-
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button[type=submit]:hover { background: var(--accent-hov); }
@@ -274,7 +273,6 @@ button[type=submit]:hover { background: var(--accent-hov); }
 .mapa-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    color: var(--text-sub);
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
@@ -284,7 +282,6 @@ button[type=submit]:hover { background: var(--accent-hov); }
 .grafico-detalhe {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    color: var(--text-sub);
     border-radius: 10px;
     padding: 24px;
     min-height: 420px;
