@@ -101,12 +101,12 @@ def _gerar_mapa_html(df_long: pd.DataFrame, geojson: dict, titulo: str) -> str:
     )
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(
-        template="plotly_dark",
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
+        template="plotly_white",
+        paper_bgcolor="#1e1e1e",
+        plot_bgcolor="#1e1e1e",
         margin={"r": 0, "t": 50, "l": 0, "b": 0},
-        title=titulo,
-        font=dict(color="#fff", family="Arial, sans-serif"),
+        title=dict(text=titulo, font=dict(color="#e8e8e8")),
+        font=dict(color="#e8e8e8", family="Arial, sans-serif"),
     )
     return fig.to_html(full_html=False, include_plotlyjs=False, div_id="mapa")
 
