@@ -39,7 +39,23 @@ CAPITAL_PARA_ESTADO = {
     "Cuiabá": "Mato Grosso",         "Goiânia": "Goiás",
     "Brasília": "Distrito Federal",
 }
-
+# Qualidade dos dados por procedimento
+# "bom" = dados estáveis e completos | "precario" = incompletos ou instáveis
+QUALIDADE_DADOS = {
+    "apoio_matricial_trabalhador":      "precario",
+    "urgencia_observacao_24h":          "bom",
+    "urgencia_atencao_basica":          "bom",
+    "urgencia_atencao_especializada":   "bom",
+    "urgencia_observacao_8h":           "precario",
+    "urgencia_remocao":                 "precario",
+    "urgencia_pequeno_queimado":        "precario",
+    "matriciamento_pontos_atencao":     "precario",
+    "regulacao_samu_192":               "bom",
+    "samu_192_com_orientacao":          "bom",
+    "samu_192_regulacao":               "bom",
+    "tenecteplase_40mg":                "precario",
+    "tenecteplase_50mg":                "precario",
+}
 def _montar_dados_mapa(proc_key: str):
     """
     A partir do df 'anos_total' do procedimento, gera:
@@ -145,6 +161,7 @@ def grafico():
             procedimentos=sus.labels_procedimentos,
             graficos=list(sus.funcoes_graficos.keys()),
             datasets=sus.DATASETS_INFO,
+            qualidade=sus.QUALIDADE_DADOS,
         )
     except Exception:
         return f"<pre>{traceback.format_exc()}</pre>"
@@ -174,6 +191,7 @@ def mapa():
             dados_json=dados_json,
             proc_selecionado=proc_selecionado,
             procedimentos=sus.labels_procedimentos,
+            qualidade=sus.QUALIDADE_DADOS,
         )
     except Exception:
         return f"<pre>{traceback.format_exc()}</pre>"
