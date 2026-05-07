@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização Geográfica – SUS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+
+<div class="page-header">
+    <a href="/" class="btn-voltar">← Voltar</a>
+    <div>
+        <h1>Visualização Geográfica</h1>
+        <div class="subtitulo">Mapa coroplético por estado · clique para detalhar</div>
+    </div>
+</div>
+
+<div class="mapa-page">
+
+    <form class="mapa-form" method="POST">
+        <label for="procedimento">Procedimento:</label>
+        <select name="procedimento" id="procedimento">
+            {% for chave, label in procedimentos.items() %}
+                <option value="{{ chave }}"
+                    {% if proc_selecionado == chave %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Gerar Mapa</button>
+    </form>
+
+    {% if mapa_html %}
+
+        <div class="mapa-wrapper">
+            {{ mapa_html|safe }}
+        </div>
+
+        <div class="grafico-detalhe">
+            <h3 id="nomeEstado">🖱️ Clique em um estado no mapa para ver a evolução temporal</h3>
+            <div id="graficoEstado"></div>
+        </div>
+
+        {# Dados JSON embutidos para o JS usar sem nova requisição #}
+        <script id="dados-json" type="application/json">
+            {{ dados_json|safe }}
+        </script>
+
+        <script>
+        window.addEventListener('load', () => {
+
+            const dados = JSON.parse(
+                document.getElementById('dados-json').textContent
+            );
+
+            const mapa = document.querySelector('.plotly-graph-div');
+            if (!mapa) return;
+
+            function criarGraficoEstado(nomeEstado) {
+
+                const dadosEstado = dados
+                    .filter(d => d.nome_estado === nomeEstado)
+                    .sort((a, b) => Number(a.Ano) - Number(b.Ano));
+
+                if (dadosEstado.length === 0) return;
+
+                const anos   = dadosEstado.map(d => d.Ano);
+                const valores = dadosEstado.map(d => d.Valor);
+
+                const trace = {
+                    x: anos,
+                    y: valores,
+                    mode: 'lines+markers',
+                    type: 'scatter',
+                    line:   { width: 3, color: '#00c6ff' },
+                    marker: { size: 9,  color: '#00c6ff' },
+                    fill: 'tozeroy',
+                    fillcolor: 'rgba(0,198,255,0.08)'
+                };
+
+                const layout = {
+                    template: 'plotly_dark',
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor:  'rgba(0,0,0,0)',
+                    margin: { t: 20, r: 20, b: 50, l: 60 },
+                    font:   { color: '#fff', family: 'Arial, sans-serif' },
+                    xaxis:  { title: 'Ano',  gridcolor: 'rgba(255,255,255,0.08)' },
+                    yaxis:  { title: 'Atendimentos por 100k hab', gridcolor: 'rgba(255,255,255,0.08)' }
+                };
+
+                Plotly.newPlot('graficoEstado', [trace], layout, { responsive: true });
+
+                document.getElementById('nomeEstado').innerText =
+                    `📍 Evolução Temporal — ${nomeEstado}`;
+            }
+
+            mapa.on('plotly_click', function(data) {
+                const estado = data.points[0].location;
+                criarGraficoEstado(estado);
+            });
+        });
+        </script>
+
+    {% else %}
+
+        <div class="grafico-detalhe" style="display:flex; align-items:center; justify-content:center;">
+            <p class="placeholder-mapa">Selecione um procedimento acima e clique em "Gerar Mapa".</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
