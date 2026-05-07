@@ -91,7 +91,7 @@ QUALIDADE_DADOS = {
     "urgencia_remocao":                 "precario",
     "urgencia_pequeno_queimado":        "precario",
     "matriciamento_pontos_atencao":     "precario",
-    "regulacao_samu_192":               "bom",
+    "regulacao_samu_192":               "precario",
     "samu_192_com_orientacao":          "bom",
     "samu_192_regulacao":               "bom",
     "tenecteplase_40mg":                "precario",
