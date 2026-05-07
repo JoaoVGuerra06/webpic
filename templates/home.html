@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estatísticas SUS – Per Capita nas Capitais</title>
+    <script src="{{ url_for('static', filename='tema.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="home-container">
+
+    <button class="btn-tema home-tema" onclick="alternarTema()">🌙 Modo escuro</button>
 
     <h1>Estatísticas de Procedimentos do SUS</h1>
     <p class="subtitulo">Atendimentos per capita nas capitais brasileiras · 2018–2024</p>

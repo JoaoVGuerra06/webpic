@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualização Gráfica – SUS</title>
+    <script src="{{ url_for('static', filename='tema.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -14,6 +15,7 @@
         <h1>Visualização Gráfica</h1>
         <div class="subtitulo">Atendimentos per capita nas capitais · 2018–2024</div>
     </div>
+    <button class="btn-tema" onclick="alternarTema()">🌙 Modo escuro</button>
 </div>
 
 <div class="container">
@@ -62,7 +64,7 @@
     </form>
 
     {% if erro %}
-        <div class="aviso"> {{ erro }}</div>
+        <div class="aviso">⚠️ {{ erro }}</div>
     {% endif %}
 
     <div class="grafico">

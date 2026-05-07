@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualização Geográfica – SUS</title>
+    <script src="{{ url_for('static', filename='tema.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 </head>
@@ -15,6 +16,7 @@
         <h1>Visualização Geográfica</h1>
         <div class="subtitulo">Mapa coroplético por estado · clique para detalhar</div>
     </div>
+    <button class="btn-tema" onclick="alternarTema()">🌙 Modo escuro</button>
 </div>
 
 <div class="mapa-page">
@@ -43,7 +45,6 @@
             <div id="graficoEstado"></div>
         </div>
 
-        {# Dados JSON embutidos para o JS usar sem nova requisição #}
         <script id="dados-json" type="application/json">
             {{ dados_json|safe }}
         </script>
@@ -58,6 +59,11 @@
             const mapa = document.querySelector('.plotly-graph-div');
             if (!mapa) return;
 
+            function corTema() {
+                return document.documentElement.getAttribute('data-theme') === 'dark'
+                    ? '#4ade80' : '#2563eb';
+            }
+
             function criarGraficoEstado(nomeEstado) {
 
                 const dadosEstado = dados
@@ -66,46 +72,68 @@
 
                 if (dadosEstado.length === 0) return;
 
-                const anos   = dadosEstado.map(d => d.Ano);
-                const valores = dadosEstado.map(d => d.Valor);
+                const cor = corTema();
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
                 const trace = {
-                    x: anos,
-                    y: valores,
+                    x: dadosEstado.map(d => d.Ano),
+                    y: dadosEstado.map(d => d.Valor),
                     mode: 'lines+markers',
                     type: 'scatter',
-                    line:   { width: 3, color: '#00c6ff' },
-                    marker: { size: 9,  color: '#00c6ff' },
+                    line:   { width: 3, color: cor },
+                    marker: { size: 9,  color: cor },
                     fill: 'tozeroy',
-                    fillcolor: 'rgba(0,198,255,0.08)'
+                    fillcolor: isDark
+                        ? 'rgba(74,222,128,0.07)'
+                        : 'rgba(37,99,235,0.07)'
                 };
 
                 const layout = {
-                    template: 'plotly_dark',
                     paper_bgcolor: 'rgba(0,0,0,0)',
                     plot_bgcolor:  'rgba(0,0,0,0)',
                     margin: { t: 20, r: 20, b: 50, l: 60 },
-                    font:   { color: '#fff', family: 'Arial, sans-serif' },
-                    xaxis:  { title: 'Ano',  gridcolor: 'rgba(255,255,255,0.08)' },
-                    yaxis:  { title: 'Atendimentos por 100k hab', gridcolor: 'rgba(255,255,255,0.08)' }
+                    font:   {
+                        color: isDark ? '#e8e8e8' : '#111111',
+                        family: 'Arial, sans-serif'
+                    },
+                    xaxis: {
+                        title: 'Ano',
+                        gridcolor: isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)',
+                        color: isDark ? '#888' : '#555'
+                    },
+                    yaxis: {
+                        title: 'Atendimentos por 100k hab',
+                        gridcolor: isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)',
+                        color: isDark ? '#888' : '#555'
+                    }
                 };
 
                 Plotly.newPlot('graficoEstado', [trace], layout, { responsive: true });
 
                 document.getElementById('nomeEstado').innerText =
-                    ` Evolução Temporal — ${nomeEstado}`;
+                    `📍 Evolução Temporal — ${nomeEstado}`;
             }
 
+            // redesenha ao trocar tema se já havia um estado selecionado
+            let estadoAtual = null;
+
             mapa.on('plotly_click', function(data) {
-                const estado = data.points[0].location;
-                criarGraficoEstado(estado);
+                estadoAtual = data.points[0].location;
+                criarGraficoEstado(estadoAtual);
+            });
+
+            const observer = new MutationObserver(() => {
+                if (estadoAtual) criarGraficoEstado(estadoAtual);
+            });
+            observer.observe(document.documentElement, {
+                attributes: true, attributeFilter: ['data-theme']
             });
         });
         </script>
 
     {% else %}
 
-        <div class="grafico-detalhe" style="display:flex; align-items:center; justify-content:center;">
+        <div class="grafico-detalhe" style="display:flex;align-items:center;justify-content:center;">
             <p class="placeholder-mapa">Selecione um procedimento acima e clique em "Gerar Mapa".</p>
         </div>
 
