@@ -331,17 +331,26 @@ button[type=submit]:hover { background: var(--accent-hov); }
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
+
     width: 240px;
+    max-width: 300px;
+
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 12px 14px;
+
     font-size: 0.8rem;
     font-weight: normal;
     color: var(--text-main);
     line-height: 1.5;
+
     z-index: 100;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+
+    white-space: normal;       /* permite quebrar linha */
+    word-wrap: break-word;     /* quebra palavras grandes */
+    overflow-wrap: break-word; /* compatibilidade moderna */
 }
 
 .qualidade-info:hover .qualidade-tooltip {
