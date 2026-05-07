@@ -11,8 +11,8 @@ Carrega e processa os dados do SUS a partir do novo formato unificado:
 A partir do CSV mensal único, gera automaticamente:
   - "meses_181920"  → meses de 2018, 2019 e 2020
   - "meses_232424"  → meses de 2023 e 2024
-  - "meses_total"   → todos os meses disponíveis (exceto 2021 e 2022)
-  - "anos_total"    → soma anual por capital (exceto 2021 e 2022)
+  - "meses_total"   → todos os meses disponíveis 
+  - "anos_total"    → soma anual por capital 
 """
 
 import pandas as pd
