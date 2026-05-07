@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas SUS – Per Capita nas Capitais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Estatísticas de Procedimentos do SUS</h1>
+    <p class="subtitulo">Atendimentos per capita nas capitais brasileiras · 2018–2024</p>
+
+    <form method="POST">
+
+        <label for="procedimento">Procedimento:</label>
+        <select name="procedimento" id="procedimento">
+            {% for chave, label in procedimentos.items() %}
+                <option value="{{ chave }}"
+                    {% if request.form.get('procedimento') == chave %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="grafico">Tipo de Gráfico:</label>
+        <select name="grafico" id="grafico">
+            {% set nomes_graficos = {
+                "linhas":       "Linhas",
+                "barras":       "Barras (por capital)",
+                "barras_stack": "Barras Empilhadas",
+                "heatmap":      "Heatmap",
+                "area":         "Área Empilhada"
+            } %}
+            {% for g in graficos %}
+                <option value="{{ g }}"
+                    {% if request.form.get('grafico') == g %}selected{% endif %}>
+                    {{ nomes_graficos.get(g, g) }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="dataset">Período:</label>
+        <select name="dataset" id="dataset">
+            {% for chave, label in datasets.items() %}
+                <option value="{{ chave }}"
+                    {% if request.form.get('dataset') == chave %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Gerar Gráfico</button>
+
+    </form>
+
+    {% if erro %}
+        <div class="aviso">⚠️ {{ erro }}</div>
+    {% endif %}
+
+    <div class="grafico">
+        {% if grafico %}
+            {{ grafico|safe }}
+        {% else %}
+            <p class="placeholder">Selecione um procedimento, tipo de gráfico e período acima.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

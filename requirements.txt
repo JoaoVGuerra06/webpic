@@ -1,6 +1,4 @@
-Flask
+flask
 pandas
-numpy
-matplotlib
 plotly
-gunicorn
+requests
