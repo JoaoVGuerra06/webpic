@@ -23,14 +23,25 @@
     <form method="POST">
 
         <label for="procedimento">Procedimento:</label>
-        <select name="procedimento" id="procedimento">
-            {% for chave, label in procedimentos.items() %}
-                <option value="{{ chave }}"
-                    {% if request.form.get('procedimento') == chave %}selected{% endif %}>
-                    {{ label }}
-                </option>
-            {% endfor %}
-        </select>
+        <div class="select-wrapper">
+            <select name="procedimento" id="procedimento">
+                {% for chave, label in procedimentos.items() %}
+                    <option value="{{ chave }}"
+                        {% if request.form.get('procedimento') == chave %}selected{% endif %}>
+                        {{ label }}
+                        {% if qualidade.get(chave) == 'bom' %} ✅{% else %} ⚠️{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="qualidade-info">
+                🎨 Cores
+                <div class="qualidade-tooltip">
+                    <strong>Sobre as etiquetas:</strong><br><br>
+                    <span class="tag-bom">✅ Verde</span> — dados estáveis e completos (2018–2024).<br><br>
+                    <span class="tag-precario">⚠️ Vermelho</span> — dados incompletos, com lacunas ou muito esparsas. Interprete com cautela.
+                </div>
+            </div>
+        </div>
 
         <label for="grafico">Tipo de Gráfico:</label>
         <select name="grafico" id="grafico">
