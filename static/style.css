@@ -213,6 +213,8 @@ button[type=submit] {
     border: none;
     font-size: 0.9rem;
     transition: background 0.2s;
+    display: block;
+    width: fit-content;
 }
 
 button[type=submit]:hover { background: var(--accent-hov); }
