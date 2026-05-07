@@ -16,7 +16,7 @@
         <h1>Visualização Geográfica</h1>
         <div class="subtitulo">Mapa coroplético por estado · clique para detalhar</div>
     </div>
-    <button class="btn-tema" onclick="alternarTema()"> Modo escuro</button>
+    <button class="btn-tema" onclick="alternarTema()">🌙 Modo escuro</button>
 </div>
 
 <div class="mapa-page">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="grafico-detalhe">
-            <h3 id="nomeEstado"> Clique em um estado no mapa para ver a evolução temporal</h3>
+            <h3 id="nomeEstado">🖱️ Clique em um estado no mapa para ver a evolução temporal</h3>
             <div id="graficoEstado"></div>
         </div>
 
@@ -56,8 +56,17 @@
                 document.getElementById('dados-json').textContent
             );
 
-            const mapa = document.querySelector('.plotly-graph-div');
-            if (!mapa) return;
+            // Aguarda Plotly terminar de montar o mapa animado
+            function registrarClique(tentativas) {
+                const mapa = document.getElementById('mapa');
+                if (!mapa || typeof mapa.on !== 'function') {
+                    if (tentativas > 0) setTimeout(() => registrarClique(tentativas - 1), 400);
+                    return;
+                }
+                iniciar(mapa);
+            }
+
+            function iniciar(mapa) {
 
             function corTema() {
                 return document.documentElement.getAttribute('data-theme') === 'dark'
@@ -111,7 +120,7 @@
                 Plotly.newPlot('graficoEstado', [trace], layout, { responsive: true });
 
                 document.getElementById('nomeEstado').innerText =
-                    ' Evolução Temporal — ${nomeEstado}`;
+                    `📍 Evolução Temporal — ${nomeEstado}`;
             }
 
             // redesenha ao trocar tema se já havia um estado selecionado
@@ -128,6 +137,9 @@
             observer.observe(document.documentElement, {
                 attributes: true, attributeFilter: ['data-theme']
             });
+            } // fim iniciar
+
+            registrarClique(20);
         });
         </script>
 
