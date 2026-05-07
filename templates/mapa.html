@@ -16,7 +16,7 @@
         <h1>Visualização Geográfica</h1>
         <div class="subtitulo">Mapa coroplético por estado · clique para detalhar</div>
     </div>
-    <button class="btn-tema" onclick="alternarTema()">🌙 Modo escuro</button>
+    <button class="btn-tema" onclick="alternarTema()"> Modo escuro</button>
 </div>
 
 <div class="mapa-page">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="grafico-detalhe">
-            <h3 id="nomeEstado">🖱️ Clique em um estado no mapa para ver a evolução temporal</h3>
+            <h3 id="nomeEstado"> Clique em um estado no mapa para ver a evolução temporal</h3>
             <div id="graficoEstado"></div>
         </div>
 
@@ -111,7 +111,7 @@
                 Plotly.newPlot('graficoEstado', [trace], layout, { responsive: true });
 
                 document.getElementById('nomeEstado').innerText =
-                    `📍 Evolução Temporal — ${nomeEstado}`;
+                    ' Evolução Temporal — ${nomeEstado}`;
             }
 
             // redesenha ao trocar tema se já havia um estado selecionado
