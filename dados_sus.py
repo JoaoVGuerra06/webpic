@@ -80,7 +80,23 @@ cod_capitais = {
     "520870": "Goiânia",
     "530010": "Brasília",
 }
-
+# Qualidade dos dados por procedimento
+# "bom" = dados estáveis e completos | "precario" = incompletos ou instáveis
+QUALIDADE_DADOS = {
+    "apoio_matricial_trabalhador":      "precario",
+    "urgencia_observacao_24h":          "bom",
+    "urgencia_atencao_basica":          "bom",
+    "urgencia_atencao_especializada":   "bom",
+    "urgencia_observacao_8h":           "precario",
+    "urgencia_remocao":                 "precario",
+    "urgencia_pequeno_queimado":        "precario",
+    "matriciamento_pontos_atencao":     "precario",
+    "regulacao_samu_192":               "bom",
+    "samu_192_com_orientacao":          "bom",
+    "samu_192_regulacao":               "bom",
+    "tenecteplase_40mg":                "precario",
+    "tenecteplase_50mg":                "precario",
+}
 # ─────────────────────────────────────────────────────────────
 # CATÁLOGO DOS 13 PROCEDIMENTOS
 # chave  → identificador interno (usado na URL e no dicionário)
