@@ -490,3 +490,7 @@ button[type=submit]:hover { background: var(--accent-hov); }
         height: 280px;
     }
 }
+/* Tooltip de qualidade — suporte a clique/toque */
+.qualidade-info.tooltip-aberto .qualidade-tooltip {
+    display: block;
+}
