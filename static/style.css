@@ -359,3 +359,134 @@ button[type=submit]:hover { background: var(--accent-hov); }
 
 .tag-bom     { color: #16a34a; }
 .tag-precario { color: #dc2626; }
+/* ═══════════════════════════════════════
+   MOBILE (até 600px)
+═══════════════════════════════════════ */
+@media (max-width: 600px) {
+
+    /* HOME — botão de tema vai pra baixo do título */
+    .home-container {
+        padding-top: 32px;
+    }
+
+    .home-tema {
+        position: static;
+        margin-bottom: 20px;
+        align-self: flex-end;
+    }
+
+    .home-container h1 {
+        font-size: 1.4rem;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 360px;
+        padding: 28px 24px;
+    }
+
+    /* HEADER — empilha verticalmente */
+    .page-header {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    .page-header h1 {
+        font-size: 1rem;
+    }
+
+    .page-header .subtitulo {
+        font-size: 0.72rem;
+    }
+
+    .btn-tema {
+        margin-left: 0;
+        font-size: 0.78rem;
+        padding: 5px 10px;
+    }
+
+    /* FORMULÁRIOS — tudo full width */
+    .container {
+        width: 100%;
+        padding: 16px;
+    }
+
+    form {
+        padding: 16px;
+    }
+
+    label {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    /* SELECT-WRAPPER — empilha select e botão de cores */
+    .select-wrapper {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .select-wrapper select {
+        width: 100%;
+    }
+
+    /* Tooltip de qualidade abre pra esquerda em mobile */
+    .qualidade-tooltip {
+        right: auto;
+        left: 0;
+        width: 220px;
+    }
+
+    /* PÁGINA DE MAPA */
+    .mapa-page {
+        padding: 12px 16px 32px 16px;
+    }
+
+    .mapa-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .mapa-form select {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .mapa-form button {
+        width: 100%;
+    }
+
+    /* Mapa Plotly — força altura menor pra não ficar cortado */
+    .mapa-wrapper {
+        overflow-x: auto;
+    }
+
+    .mapa-wrapper .plotly-graph-div,
+    .mapa-wrapper > div {
+        min-width: 340px;
+        height: 320px !important;
+    }
+
+    /* Gráfico de detalhe */
+    .grafico-detalhe {
+        padding: 14px;
+        min-height: 300px;
+    }
+
+    #graficoEstado {
+        height: 280px;
+    }
+}
