@@ -87,6 +87,19 @@
     </div>
 
 </div>
-
+<script>
+    document.querySelectorAll('.qualidade-info').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('tooltip-aberto');
+        });
+    });
+    
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.qualidade-info.tooltip-aberto').forEach(function(btn) {
+            btn.classList.remove('tooltip-aberto');
+        });
+    });
+</script>
 </body>
 </html>
