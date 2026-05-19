@@ -97,12 +97,7 @@ QUALIDADE_DADOS = {
     "tenecteplase_40mg":                "precario",
     "tenecteplase_50mg":                "precario",
 }
-# ─────────────────────────────────────────────────────────────
-# CATÁLOGO DOS 13 PROCEDIMENTOS
-# chave  → identificador interno (usado na URL e no dicionário)
-# label  → nome legível para o usuário
-# url    → link raw do GitHub para o CSV
-# ─────────────────────────────────────────────────────────────
+
 BASE = "https://raw.githubusercontent.com/JoaoVGuerra06/PesquisaDataSus/main/"
 
 PROCEDIMENTOS_CONFIG = {
@@ -160,12 +155,11 @@ PROCEDIMENTOS_CONFIG = {
     },
 }
 
-# Anos a excluir dos gráficos (pandemia + lacuna nos dados)
+# Anos a excluir dos gráficos 
 ANOS_EXCLUIDOS = {2021, 2022}
 
-# ─────────────────────────────────────────────────────────────
+
 # FUNÇÕES DE PROCESSAMENTO
-# ─────────────────────────────────────────────────────────────
 
 def _carregar_csv_bruto(url: str) -> pd.DataFrame:
     """Lê o CSV no novo formato unificado."""
@@ -280,9 +274,9 @@ def percapita_novo(url: str) -> dict[str, pd.DataFrame]:
     return resultado
 
 
-# ─────────────────────────────────────────────────────────────
-# CARREGAMENTO EM MASSA DOS 13 PROCEDIMENTOS
-# ─────────────────────────────────────────────────────────────
+
+# CARREGAMENTO DOS 13 PROCEDIMENTOS
+
 
 print("Carregando dados do SUS...")
 
@@ -294,20 +288,18 @@ for chave, config in PROCEDIMENTOS_CONFIG.items():
 
 print("Dados carregados.\n")
 
-# Rótulos legíveis para o HTML (chave → label)
+# Rótulos legíveis para o HTML
 labels_procedimentos = {k: v["label"] for k, v in PROCEDIMENTOS_CONFIG.items()}
 
-# Datasets disponíveis e seus rótulos de exibição
+# Datasets disponíveis
 DATASETS_INFO = {
     "meses_181920": "Meses 2018–2020",
     "meses_2324":   "Meses 2023–2024",
     "meses_total":  "Meses (total, sem 2021/2022)",
     "anos_total":   "Soma Anual (sem 2021/2022)",
 }
-
-# ─────────────────────────────────────────────────────────────
 # FUNÇÕES DE PLOTAGEM
-# ─────────────────────────────────────────────────────────────
+
 
 def _titulo(proc_key: str, dataset_key: str) -> str:
     label_proc    = labels_procedimentos.get(proc_key, proc_key)
